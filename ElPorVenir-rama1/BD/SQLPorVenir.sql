@@ -26,9 +26,7 @@ CREATE TABLE Proveedor(
 	telefono VARCHAR(10) NOT NULL,
 	idCompania INT REFERENCES Compania(idCompania)
 )
-GO
-
-
+GO 
 
 CREATE TABLE Producto(
 	codigoProd CHAR(100) PRIMARY KEY NOT NULL,
@@ -39,8 +37,8 @@ CREATE TABLE Producto(
 	/* 1 = activo & 2= no activo*/
 )
 GO
+SELECT * from Producto
 
-SELECT idTipoP FROM Producto WHERE codigoProd = ''
 
 CREATE TABLE Agranel(
 	idAgranel INT PRIMARY KEY NOT NULL IDENTITY,
@@ -61,11 +59,6 @@ CREATE TABLE Unidad(
 	tipoUnidad VARCHAR(10) NOT NULL 
 )
 GO
-
-INSERT INTO Unidad VALUES('Kg');
-INSERT INTO Unidad VALUES('g');
-INSERT INTO Unidad VALUES('ml');
-INSERT INTO Unidad VALUES('L');
 
 CREATE TABLE ProdUnidad(
 	idUnidad INT REFERENCES Unidad(idUnidad),
@@ -100,7 +93,7 @@ CREATE TABLE Almacen(
 )
 GO
 
-INSERT INTO Almacen VALUES(20,500)
+
 
 CREATE TABLE AlmacenProd(
 	idAlmacen INT REFERENCES Almacen(idAlmacen),
@@ -109,7 +102,7 @@ CREATE TABLE AlmacenProd(
 )
 GO
 
-INSERT INTO AlmacenProd VALUES(1,'123456',200)
+
 
 CREATE TABLE Pedido(
 	nPedido INT NOT NULL PRIMARY KEY IDENTITY,
@@ -175,7 +168,7 @@ CREATE TABLE Stok(
 	idAlmacen INT REFERENCES Almacen(idAlmacen)
 )
 GO
-
+ 
 CREATE TABLE DetalleVenta(
 	nVenta INT REFERENCES Venta(nVenta),
 	nStock INT REFERENCES Stok(idStock),

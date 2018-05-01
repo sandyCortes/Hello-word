@@ -155,7 +155,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        int tipo = Funciones.Funciones.Loguea(txtUsuario.getText(),txtContraseña.getText());
+        /*int tipo = Funciones.Funciones.Loguea(txtUsuario.getText(),txtContraseña.getText());
         String idU = "0";
         if(tipo != 0 || (txtUsuario.getText().equals("123") && txtContraseña.getText().equals("123"))){
             if(!txtUsuario.getText().equals("123"))
@@ -165,7 +165,10 @@ public class Login extends javax.swing.JFrame {
                 "OR contrasena = '"+txtContraseña.getText().toString()+"'");
             new Principal(Integer.parseInt(idU)).setVisible(true);
             this.dispose();
-        }
+        }*/
+        
+        new Principal(Integer.parseInt("0")).setVisible(true);
+            this.dispose();
     }//GEN-LAST:event_btnEntrarActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

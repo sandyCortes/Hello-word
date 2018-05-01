@@ -16,7 +16,7 @@ AS
 	M.idEmpaquetado = E.idEmpaquetado
 	INNER JOIN  Contenido C
 	ON C.idContenido = M.idContenido
-	GO 
+GO 
 
 CREATE VIEW MuestraProductosA
 AS
@@ -24,7 +24,7 @@ AS
 	FROM Producto AS P JOIN Agranel A ON P.codigoProd = A.codigoProd
 	INNER JOIN TipoProducto T ON 
 	P.idTipoP = T.idTipoP	
-	GO
+GO
 	
 CREATE VIEW ProdStock
 AS
@@ -36,6 +36,7 @@ AS
 	INNER JOIN TipoProducto T
 	ON P.idTipoP = T.idTipoP
 	WHERE P.activo = 1
+GO
 
 CREATE VIEW ProdAlmacen 
 AS
@@ -47,5 +48,5 @@ AS
 	INNER JOIN TipoProducto T
 	ON P.idTipoP = T.idTipoP
 	WHERE P.activo = 1
-	
+GO	
 

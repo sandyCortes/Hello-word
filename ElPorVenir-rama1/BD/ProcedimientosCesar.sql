@@ -19,6 +19,7 @@ AND aPmUser = @aPmUser)
 BEGIN
     INSERT INTO Usuarios VALUES(@nombreUse,@aPpUser,@aPmUser
     ,@fechaNa,@genero,@tipo,@telefono,@correo,1,@contrasena)
+
     SET @respuesta = 'El usuario fue agregado correctamente'
 END
 ELSE
@@ -26,12 +27,6 @@ BEGIN
     SET @respuesta = 'El usuario ya existe'
 END
 GO
-
-
-exec AgregarUsuario 'CESAR','MUÑOZ','ocampo','1994/09/27'
-,'M',1,'0445533','cesar_dantexD','dantexD123',''
-GO
-
 
 CREATE PROCEDURE EliminarUsuario
 @nombre varchar(20),
@@ -136,6 +131,7 @@ AS
 		END
 GO
 
+/*
 CREATE PROCEDURE RegistraEmp
 	@codProd CHAR(100),
 	@nombre VARCHAR(100),
@@ -158,7 +154,8 @@ AS
 			INSERT INTO SurteProducto VALUES ();
 			SET @resp = 'Producto agregado'
 		END
-
+GO
+*/
 CREATE PROCEDURE GeneraPass
 	@res INT OUTPUT
 AS
