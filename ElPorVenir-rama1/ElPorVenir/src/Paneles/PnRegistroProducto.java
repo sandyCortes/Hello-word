@@ -43,6 +43,8 @@ public class PnRegistroProducto extends javax.swing.JPanel {
         txtCantidadMin = new javax.swing.JTextField();
         txtCantidadMax = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtCantStock = new javax.swing.JTextField();
         checkAgranel = new javax.swing.JCheckBox();
 
         setPreferredSize(new java.awt.Dimension(610, 415));
@@ -90,6 +92,8 @@ public class PnRegistroProducto extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setText("CANTIDAD EN STOCK");
+
         javax.swing.GroupLayout pnAgregarPLayout = new javax.swing.GroupLayout(pnAgregarP);
         pnAgregarP.setLayout(pnAgregarPLayout);
         pnAgregarPLayout.setHorizontalGroup(
@@ -104,7 +108,9 @@ public class PnRegistroProducto extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(jLabel19)
                     .addComponent(txtCantidadMin)
-                    .addComponent(txtCantidadMax))
+                    .addComponent(txtCantidadMax)
+                    .addComponent(jLabel10)
+                    .addComponent(txtCantStock))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(pnAgregarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarPLayout.createSequentialGroup()
@@ -177,15 +183,16 @@ public class PnRegistroProducto extends javax.swing.JPanel {
                 .addGroup(pnAgregarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel19))
-                .addGroup(pnAgregarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnAgregarPLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jclCaduca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnAgregarPLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCantidadMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCantidadMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(pnAgregarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jclCaduca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnAgregarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCantStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
 
@@ -225,7 +232,7 @@ public class PnRegistroProducto extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(pnAgregarP, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnAgregarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 410));
@@ -249,19 +256,20 @@ public class PnRegistroProducto extends javax.swing.JPanel {
             float cont =Float.parseFloat(txtContenidoNeto.getText());
             float precioV =Float.parseFloat(pnPrecioCompra.getText());
             float precioC =Float.parseFloat(pnPrecioVenta.getText());
+            int cantS = Integer.parseInt(txtCantStock.getText());
             if(checkAgranel.isSelected()){
                 FuncionesAgregar.AgregaAgranel(Funciones.Funciones.codAgranel(),
                     txtDescripcion.getText(),cant,cantMin,cantMax
                     ,cont,cbxUnidad.getSelectedItem().toString(),
                     RegresaF(),cbxProvedor.getSelectedItem().toString(),
-                    precioV,precioC);
+                    precioV,precioC,cantS);
             }
             else{
                 FuncionesAgregar.AgregaEmpaquetado(txtCodigoBarras.getText(),
                     txtDescripcion.getText(),cant,cantMin,cantMax
                     ,cont,cbxUnidad.getSelectedItem().toString(),
                     RegresaF(),cbxProvedor.getSelectedItem().toString(),
-                    precioV,precioC);
+                    precioV,precioC,cantS);
             }
         }
 
@@ -271,7 +279,7 @@ public class PnRegistroProducto extends javax.swing.JPanel {
 
     }//GEN-LAST:event_pnPrecioVentaActionPerformed
     
-    private String RegresaF(){
+    public String RegresaF(){
         String fecha = Integer.toString(jclCaduca.getCalendar().get(Calendar.YEAR))
                 +"/"+Integer.toString(jclCaduca.getCalendar().get(Calendar.MONTH))
                 +"/"+Integer.toString(jclCaduca.getCalendar().get(Calendar.DAY_OF_MONTH));
@@ -291,6 +299,7 @@ public class PnRegistroProducto extends javax.swing.JPanel {
     private javax.swing.JComboBox cbxUnidad;
     private javax.swing.JCheckBox checkAgranel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -306,6 +315,7 @@ public class PnRegistroProducto extends javax.swing.JPanel {
     private javax.swing.JPanel pnAgregarP;
     private javax.swing.JTextField pnPrecioCompra;
     private javax.swing.JTextField pnPrecioVenta;
+    private javax.swing.JTextField txtCantStock;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCantidadMax;
     private javax.swing.JTextField txtCantidadMin;

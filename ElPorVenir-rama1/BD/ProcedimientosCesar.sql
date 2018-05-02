@@ -67,8 +67,6 @@ set @respuesta = 'Usuario modificado'
 
 GO
 
-
-
 CREATE PROCEDURE AgregaCompania
 	@descripcion varchar (100),
 	@respuesta 	VARCHAR(50) OUTPUT
@@ -131,31 +129,6 @@ AS
 		END
 GO
 
-/*
-CREATE PROCEDURE RegistraEmp
-	@codProd CHAR(100),
-	@nombre VARCHAR(100),
-	@cantidad INT,
-	@contN FLOAT,
-	@unidad varchar(10),
-	@fechaCad DATETIME,
-	@proveedor VARCHAR(100), 
-	@preioVenta FLOAT,
-	@resp VARCHAR(100) OUTPUT
-AS
-	DECLARE @tipoProd INT
-	IF NOT EXISTS (SELECT * FROM Producto WHERE codigoProd = @codProd)
-		BEGIN
-			SET @resp = 'Este producto ya existe'
-		END
-	ELSE 
-		BEGIN
-			INSERT INTO Producto VALUES(@codProd,@nombre,@fechaCad,'E',1);
-			INSERT INTO SurteProducto VALUES ();
-			SET @resp = 'Producto agregado'
-		END
-GO
-*/
 CREATE PROCEDURE GeneraPass
 	@res INT OUTPUT
 AS

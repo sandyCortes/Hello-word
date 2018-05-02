@@ -598,11 +598,18 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_pnRegistrarUsuarioMouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+      int caja = Integer.parseInt(
+              Funciones.Funciones.IDEmpleado
+            ("SELECT COUNT(nCaja) FROM AbreCaja WHERE horaCorte IS NULL"));
+      if(caja != 0){
+         JOptionPane.showMessageDialog(null, "Abriendo caja");
         new Tienda().setVisible(true);
         IntroducirPanle(new Inicio(), pnContenido, new Point(0, 0));
         pnMenuMercancia.setVisible(false);
         pnMenuVentasReportes.setVisible(false);
         pnMenuUsuarios.setVisible(false);
+      }else
+          JOptionPane.showMessageDialog(null, "Debes abrir una caja");
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked

@@ -22,6 +22,36 @@ public class Funciones {
         return new Random().nextInt();
     }
     
+    public static void AbreCaja(int nCaja,float importeI){
+        Connection c = Conexion.ObtenerConexion();
+        if(c != null){
+            try {
+                CallableStatement cs = c.prepareCall("{Call dbo.AbreC(?,?)}");
+                cs.setInt(1, nCaja);
+                cs.setFloat(2, importeI);
+                cs.execute();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+            }
+        }else
+            System.err.println("Error de conexión");
+    }
+    
+     public static void CerrarCaja(int nCaja,float importeI){
+        Connection c = Conexion.ObtenerConexion();
+        if(c != null){
+            try {
+                CallableStatement cs = c.prepareCall("{Call dbo.CerrarC(?,?)}");
+                cs.setInt(1, nCaja);
+                cs.setFloat(2, importeI);
+                cs.execute();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+            }
+        }else
+            System.err.println("Error de conexión");
+    }
+    
     public static String codAgranel(){
         String cod = "";
         Connection c = Conexion.ObtenerConexion();

@@ -1,5 +1,5 @@
-DROP DATABASE PorVenir
-GO
+--DROP DATABASE PorVenir
+--GO
 
 CREATE DATABASE PorVenir
 GO
@@ -20,6 +20,9 @@ CREATE TABLE TipoProducto(
 )
 GO
 
+INSERT INTO TipoProducto VALUES('A')
+INSERT INTO TipoProducto VALUES('E')
+
 CREATE TABLE Proveedor(
 	idProveedor INT PRIMARY KEY NOT NULL IDENTITY,
 	descripcion VARCHAR(100) NOT NULL,
@@ -27,6 +30,17 @@ CREATE TABLE Proveedor(
 	idCompania INT REFERENCES Compania(idCompania)
 )
 GO 
+
+CREATE TABLE Unidad(
+	idUnidad INT PRIMARY KEY NOT NULL IDENTITY,
+	tipoUnidad VARCHAR(10) NOT NULL 
+)
+GO
+
+INSERT INTO Unidad VALUES('Kg')
+INSERT INTO Unidad VALUES('g')
+INSERT INTO Unidad VALUES('ml')
+INSERT INTO Unidad VALUES('L')
 
 CREATE TABLE Producto(
 	codigoProd CHAR(100) PRIMARY KEY NOT NULL,
@@ -37,8 +51,6 @@ CREATE TABLE Producto(
 	/* 1 = activo & 2= no activo*/
 )
 GO
-SELECT * from Producto
-
 
 CREATE TABLE Agranel(
 	idAgranel INT PRIMARY KEY NOT NULL IDENTITY,
@@ -54,16 +66,9 @@ CREATE TABLE Empaquetado(
 )
 GO
 
-CREATE TABLE Unidad(
-	idUnidad INT PRIMARY KEY NOT NULL IDENTITY,
-	tipoUnidad VARCHAR(10) NOT NULL 
-)
-GO
-
 CREATE TABLE ProdUnidad(
 	idUnidad INT REFERENCES Unidad(idUnidad),
-	idAgranel INT REFERENCES Agranel(idAgranel),
-	idEmpaquetado INT REFERENCES Empaquetado(idEmpaquetado)
+	codigoProd CHAR(100) REFERENCES Producto(codigoProd)
 );
 GO
 
@@ -92,8 +97,6 @@ CREATE TABLE Almacen(
 	cantidadMax INT NOT NULL
 )
 GO
-
-
 
 CREATE TABLE AlmacenProd(
 	idAlmacen INT REFERENCES Almacen(idAlmacen),
@@ -137,11 +140,25 @@ GO
 
 CREATE TABLE Caja(
 	nCaja INT PRIMARY KEY NOT NULL IDENTITY,
-	montoIniciar MONEY NOT NULL,
-	montoFinal MONEY NOT NULL,
-	horaCorte DATETIME NOT NULL
+	descripcion INT
 )
 GO
+
+INSERT INTO Caja VALUES(1)
+INSERT INTO Caja VALUES(1)
+
+CREATE TABLE AbreCaja(
+	nCaja INT REFERENCES Caja(nCaja),
+	montoIniciar MONEY NOT NULL,
+	montoFinal MONEY,
+	horaCorte DATETIME
+)
+GO
+
+SELECT COUNT(nCaja) FROM Caja WHERE horaCorte IS NULL
+
+
+INSERT INTO Caja VALUES(1000,2000,'12:50')
 
 CREATE TABLE Nota(
 	nNota INT PRIMARY KEY NOT NULL IDENTITY,
@@ -154,7 +171,6 @@ CREATE TABLE Venta(
 	nVenta INT PRIMARY KEY NOT NULL IDENTITY,
 	fechaVenta DATETIME NOT NULL,
 	totalVenta MONEY NOT NULL,
-	idUsuario INT REFERENCES Usuarios(IDUsuario),
 	nCaja INT REFERENCES Caja(nCaja)
 )
 GO
